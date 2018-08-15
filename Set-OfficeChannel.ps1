@@ -35,11 +35,11 @@ function Show-Menu
      Write-Host "================ $Title ================"
      Write-Host "=============== $Title2 ============="
      Write-host " "
-     Write-Host "1: Press '1' for Office Insider Fast – weekly builds, not generally supported (Insiderfast)"
-     Write-Host "2: Press '2' for Office Insider Slow / First Release Channel (FirstReleaseCurrent)"
-     Write-Host "3: Press '3' for Current Channel (Current)"
-     Write-Host "4: Press '4' for First Release for Deferred Channel (Validation)"
-     Write-Host "5: Press '5' for Deferred Channel (previously Current Branch for Business) (Business)"
+     Write-Host "1: Press '1' for Office Insider Fast – weekly builds, not generally supported (InsiderFast)"
+     Write-Host "2: Press '2' for Office Insider Slow / Monthly Channel (Targeted) (Insiders)"
+     Write-Host "3: Press '3' for Monthly Channel (Monthly)"
+     Write-Host "4: Press '4' for Semi-Annual Channel (Targeted) (Targeted)"
+     Write-Host "5: Press '5' for Semi-Annual Channel (Broad)"
      Write-Host ""
      Write-Host "Q: Press 'Q' to quit."
 }
@@ -52,24 +52,24 @@ function Show-Menu
      {
            '1' {
                 
-                'You chose option #1 - Office Insider Fast – weekly builds, not generally supported (Insiderfast)'
-                $Channel = "Insiderfast"
+                'You chose option #1 - Office Insider Fast – weekly builds, not generally supported (InsiderFast)'
+                $Channel = "InsiderFast"
            } '2' {
                 
-                'You chose option #2 - Office Insider Slow / First Release Channel (FirstReleaseCurrent)'
-                $Channel = "FirstReleaseCurrent"
+                'You chose option #2 - Office Insider Slow / Monthly Channel (Targeted) (Insiders)'
+                $Channel = "Insiders"
            } '3' {
                 
-                'You chose option #3 - Current Channel (Current)'
-                $Channel = "Current"
+                'You chose option #3 - Monthly Channel (Monthly)'
+                $Channel = "Monthly"
              } '4' {
                 
-                'You chose option #4 - First Release for Deferred Channel (Validation)'
-                $Channel = "Validation"
+                'You chose option #4 - Semi-Annual Channel (Targeted) (Targeted)'
+                $Channel = "Targeted"
              } '5' {
                 
-                'You chose option #5- for Deferred Channel (previously Current Branch for Business) (Business)'
-                $Channel = "Business"
+                'You chose option #5 - Semi-Annual Channel (Broad)'
+                $Channel = "Broad"
            } 'q' {
                 return
            }
