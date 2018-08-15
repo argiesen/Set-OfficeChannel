@@ -24,78 +24,83 @@
 #  											loss of business information, or other pecuniary loss) arising out of the use of or inability
 #  											to use the script or documentation.
 
-function Show-Menu
-{
-     param (
-           [string]$Title =  '  Set your Office 2016 Click to Run Channel  ',
-           [string]$Title2 = "By Tom Arbuthnot tomtalks.uk Use at your own risk"
-     )
-     Write-host ""
-     write-host ""
-     Write-Host "================ $Title ================"
-     Write-Host "=============== $Title2 ============="
-     Write-host " "
-     Write-Host "1: Press '1' for Insider / Office Insider Fast – weekly builds, not generally supported (InsiderFast)"
-     Write-Host "2: Press '2' for Monthly Channel (Targeted) / Office Insider Slow (Insiders)"
-     Write-Host "3: Press '3' for Monthly Channel (Monthly)"
-     Write-Host "4: Press '4' for Semi-Annual Channel (Targeted) (Targeted)"
-     Write-Host "5: Press '5' for Semi-Annual Channel (Broad)"
-     Write-Host ""
-     Write-Host "Q: Press 'Q' to quit."
+function Show-Menu {
+	param (
+		[string]$Title =  '  Set your Office 2016 Click to Run Channel  ',
+		[string]$Title2 = "By Tom Arbuthnot tomtalks.uk Use at your own risk"
+	)
+	Write-Host
+	Write-Host
+	Write-Host "================ $Title ================"
+	Write-Host "=============== $Title2 ============="
+	Write-Host
+	Write-Host "1: Press '1' for Insider / Office Insider Fast – weekly builds, not generally supported (InsiderFast)"
+	Write-Host "2: Press '2' for Monthly Channel (Targeted) / Office Insider Slow (Insiders)"
+	Write-Host "3: Press '3' for Monthly Channel (Monthly)"
+	Write-Host "4: Press '4' for Semi-Annual Channel (Targeted) (Targeted)"
+	Write-Host "5: Press '5' for Semi-Annual Channel (Broad)"
+	Write-Host
+	Write-Host "Q: Press 'Q' to quit."
 }
 
-
-     Show-Menu
-     Write-Host ""
-     $input = Read-Host "Please make a selection"
-     switch ($input)
-     {
-           '1' {
-                
-                'You chose option #1 - Insider / Office Insider Fast – weekly builds, not generally supported (InsiderFast)'
-                $Channel = "InsiderFast"
-           } '2' {
-                
-                'You chose option #2 - Monthly Channel (Targeted) / Office Insider Slow (Insiders)'
-                $Channel = "Insiders"
-           } '3' {
-                
-                'You chose option #3 - Monthly Channel (Monthly)'
-                $Channel = "Monthly"
-             } '4' {
-                
-                'You chose option #4 - Semi-Annual Channel (Targeted) (Targeted)'
-                $Channel = "Targeted"
-             } '5' {
-                
-                'You chose option #5 - Semi-Annual Channel (Broad)'
-                $Channel = "Broad"
-           } 'q' {
-                return
-           }
-     }
+Show-Menu
+Write-Host
+$input = Read-Host "Please make a selection"
+switch ($input){
+	'1' {
+		'You chose option #1 - Insider / Office Insider Fast – weekly builds, not generally supported (InsiderFast)'
+		$Channel = "InsiderFast"
+	} '2' {
+		'You chose option #2 - Monthly Channel (Targeted) / Office Insider Slow (Insiders)'
+		$Channel = "Insiders"
+	} '3' {
+		'You chose option #3 - Monthly Channel (Monthly)'
+		$Channel = "Monthly"
+	} '4' {
+		'You chose option #4 - Semi-Annual Channel (Targeted) (Targeted)'
+		$Channel = "Targeted"
+	} '5' {
+		'You chose option #5 - Semi-Annual Channel (Broad)'
+		$Channel = "Broad"
+	} 'q' {
+		return
+	}
+}
 
  
 # If Channel Variable is set, set the registry key  
-IF ($Channel -ne $null)
-{    
-Write-Host " "
-write-host "Setting Registry Key"
-
-New-Item -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\ -Name officeupdate –Force | Out-Null
-
-# Set-Item -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate\updatebranch -Value “Current”
-
-New-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate -Name updatebranch -PropertyType String -Value $Channel | Out-Null
-
-# Output registry entries
-
-Get-ItemProperty HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate
-
-# Force Update
-
-$UpdateEXE = "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe"
-$UpdateArguements = "/update user displaylevel=true"
-
-start-process $UpdateEXE $UpdateArguements
+if ($Channel -ne $null){
+	Write-Host "Enable automatic updates?"
+	Write-Host
+	Write-Host "1: Press '1' to enable automatic updates"
+	Write-Host "2: Press '2' to disable automatic updates"
+	Write-Host
+	$input = Read-Host "Please make a selection"
+	switch ($input){
+		'1' {
+			'You chose option #1 - Enable automatic updates'
+			$AutoUpdates = "1"
+		} '2' {
+			'You chose option #2 - Disable automatic updates'
+			$AutoUpdates = "0"
+		} 'q' {
+			return
+		}
+	}
+	
+	Write-Host
+	Write-Host "Setting Registry Key"
+	
+	New-Item -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\ -Name officeupdate –Force | Out-Null
+	New-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate -Name updatebranch -PropertyType String -Value $Channel | Out-Null
+	New-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate -Name EnableAutomaticUpdates -PropertyType String -Value $AutoUpdates | Out-Null
+	
+	# Output registry entries
+	Get-ItemProperty HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate
+	
+	# Force Update
+	$UpdateEXE = "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe"
+	$UpdateArguements = "/update user displaylevel=true"
+	
+	Start-Process $UpdateEXE $UpdateArguements
 } 
