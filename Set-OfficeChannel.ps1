@@ -35,8 +35,8 @@ function Show-Menu
      Write-Host "================ $Title ================"
      Write-Host "=============== $Title2 ============="
      Write-host " "
-     Write-Host "1: Press '1' for Office Insider Fast – weekly builds, not generally supported (InsiderFast)"
-     Write-Host "2: Press '2' for Office Insider Slow / Monthly Channel (Targeted) (Insiders)"
+     Write-Host "1: Press '1' for Insider / Office Insider Fast – weekly builds, not generally supported (InsiderFast)"
+     Write-Host "2: Press '2' for Monthly Channel (Targeted) / Office Insider Slow (Insiders)"
      Write-Host "3: Press '3' for Monthly Channel (Monthly)"
      Write-Host "4: Press '4' for Semi-Annual Channel (Targeted) (Targeted)"
      Write-Host "5: Press '5' for Semi-Annual Channel (Broad)"
@@ -52,11 +52,11 @@ function Show-Menu
      {
            '1' {
                 
-                'You chose option #1 - Office Insider Fast – weekly builds, not generally supported (InsiderFast)'
+                'You chose option #1 - Insider / Office Insider Fast – weekly builds, not generally supported (InsiderFast)'
                 $Channel = "InsiderFast"
            } '2' {
                 
-                'You chose option #2 - Office Insider Slow / Monthly Channel (Targeted) (Insiders)'
+                'You chose option #2 - Monthly Channel (Targeted) / Office Insider Slow (Insiders)'
                 $Channel = "Insiders"
            } '3' {
                 
