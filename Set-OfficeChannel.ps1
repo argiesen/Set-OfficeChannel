@@ -67,7 +67,6 @@ switch ($input){
 	}
 }
 
- 
 # If Channel Variable is set, set the registry key  
 if ($Channel -ne $null){
 	Write-Host "Enable automatic updates?"
