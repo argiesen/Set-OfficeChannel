@@ -82,11 +82,15 @@ IF ($Channel -ne $null)
 Write-Host " "
 write-host "Setting Registry Key"
 
-New-Item -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\ -Name officeupdate –Force
+New-Item -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\ -Name officeupdate –Force | Out-Null
 
 # Set-Item -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate\updatebranch -Value “Current”
 
-New-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate -Name updatebranch -PropertyType String -Value $Channel
+New-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate -Name updatebranch -PropertyType String -Value $Channel | Out-Null
+
+# Output registry entries
+
+Get-ItemProperty HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate
 
 # Force Update
 
