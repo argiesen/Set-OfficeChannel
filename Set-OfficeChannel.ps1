@@ -95,7 +95,7 @@ if ($Channel -ne $null){
 	New-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate -Name EnableAutomaticUpdates -PropertyType String -Value $AutoUpdates | Out-Null
 	
 	# Output registry entries
-	Get-ItemProperty HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate
+	Get-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate
 	
 	# Force Update
 	$UpdateEXE = "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe"
